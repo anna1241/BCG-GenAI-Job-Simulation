@@ -1,0 +1,149 @@
+CHATBOT - DOCUMENTATION
+
+Author: Anna Rai
+Task: BCG GenAI Job Simulation - Task 2
+Date: 14 September, 2026
+
+
+1. PURPOSE
+
+
+The GFC Financial Chatbot is a rule-based prototype designed
+to answer predefined financial questions about three
+companies: Microsoft, Tesla, and Apple. It demonstrates the
+foundational "if-then" logic that underlies all chatbots
+before more advanced NLP or machine learning is layered on
+top.
+
+The chatbot uses the analyzed financial dataset from Task 1
+(FY 2023-2025) and returns factual, data-backed responses.
+
+
+2. HOW IT WORKS
+
+
+Step 1: Data Loading
+   - The chatbot reads "GFC_Financial_Data.csv" using pandas.
+
+Step 2: Data Cleaning
+   - Financial metrics (revenue, net income, etc.) are
+     converted from strings with commas to numeric values.
+   - Fiscal Year is converted to numeric.
+
+Step 3: Rule-Based Matching
+   - The user's query is normalized to lowercase.
+   - The chatbot checks for:
+       a) A company name (Microsoft / Tesla / Apple)
+       b) A fiscal year (2023 / 2024 / 2025; defaults to 2025)
+       c) A metric type (revenue, net income, cash flow, etc.)
+   - Based on these matches, the chatbot retrieves the
+     relevant value from the dataframe and formats a response.
+
+Step 4: Response Generation
+   - Responses are formatted as natural-language strings,
+     e.g., "Microsoft's total revenue in 2025 was
+     $281,724 million."
+
+Step 5: Interactive Loop
+   - A while loop accepts user input until the user types
+     "exit".
+
+
+3. PREDEFINED QUERIES SUPPORTED
+
+
+The chatbot supports the following query types:
+
+  Q1. Total Revenue
+      Example: "What is Microsoft's total revenue in 2025?"
+
+  Q2. Net Income (value)
+      Example: "What is Tesla's net income in 2025?"
+
+  Q3. Net Income Change (2024 -> 2025)
+      Example: "How has Apple's net income changed?"
+
+  Q4. Operating Cash Flow
+      Example: "What is Microsoft's operating cash flow in 2025?"
+
+  Q5. Total Assets
+      Example: "What are Tesla's total assets in 2025?"
+
+  Q6. Total Liabilities
+      Example: "What are Apple's total liabilities in 2024?"
+
+Companies supported: Microsoft, Tesla, Apple
+Years supported: 2023, 2024, 2025 (defaults to 2025)
+
+
+4. KEY FINDINGS FROM THE DATA
+
+
+Microsoft:
+  - Strongest overall growth across all metrics.
+  - Revenue grew 15.67% in 2024 and 14.93% in 2025.
+  - Net income grew 21.80% in 2024 and 15.54% in 2025.
+  - Operating cash flow grew 35.36% in 2024.
+
+Tesla:
+  - Significant decline in profitability.
+  - Net income fell 52.23% in 2024 and 46.11% in 2025.
+  - Revenue rose slightly in 2024 (0.95%) but fell
+    in 2025 (-2.93%).
+
+Apple:
+  - Moderate revenue growth (2.02% in 2024, 6.43% in 2025).
+  - Net income fell 3.36% in 2024 but rebounded 19.50% in 2025.
+  - Operating cash flow rose 6.98% in 2024, then fell 5.73% in 2025.
+
+
+5. LIMITATIONS
+
+
+  1. Rule-based only: The chatbot cannot understand
+     paraphrased or complex questions outside its
+     predefined patterns.
+
+  2. No NLP: It relies on simple substring matching
+     (e.g., "revenue" in query), not semantic understanding.
+
+  3. Limited company/year set: Only Microsoft, Tesla, and
+     Apple for 2023-2025 are supported.
+
+  4. No state management: The chatbot does not remember
+     previous queries within a session.
+
+  5. No calculations beyond net income change: Other
+     growth metrics are not currently queryable.
+
+  6. English only: Input must be in English.
+
+
+6. FUTURE ENHANCEMENTS
+
+
+As described in the BCG project brief, this rule-based
+prototype is the foundation for a larger system. Future
+work by other team members could include:
+
+  - NLP integration (spaCy, NLTK) for flexible parsing.
+  - Machine learning for intent classification.
+  - Real-time data integration for up-to-date figures.
+  - A Flask/Streamlit web interface for end users.
+  - State management for multi-turn conversations.
+  - Voice input/output via speech APIs.
+
+
+7. HOW TO RUN
+
+1. Ensure Python 3 and pandas are installed:
+     pip install pandas
+
+2. Place "GFC_Financial_Data.csv" in the same directory
+   as the script.
+
+3. Run:
+     python GFC_Financial_Chatbot.py
+
+4. Type your question at the "You:" prompt.
+   Type "exit" to quit.
